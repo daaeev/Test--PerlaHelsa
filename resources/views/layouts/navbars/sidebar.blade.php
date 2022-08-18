@@ -47,6 +47,12 @@
           <p>{{ __('Notifications') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'calculator' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('calculator') }}">
+          <i class="material-icons">calculate</i>
+          <p>{{ __('Calculator') }}</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

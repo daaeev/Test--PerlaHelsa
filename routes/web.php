@@ -18,6 +18,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('notifications', function () {
 		return view('pages.notifications');
 	})->name('notifications');
+
+	Route::get('calculator', function () {
+		return view('pages.calculator');
+	})->name('calculator');
 });
 
 Route::group(['middleware' => 'auth'], function () {
