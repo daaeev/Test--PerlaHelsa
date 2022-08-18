@@ -7,4 +7,4 @@ Components.forEach(element => {
     app.component(element.name, element);
 });
 
-app.mount('#application');
+app.mount('#application-vue');

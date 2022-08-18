@@ -17414,6 +17414,44 @@ function genPropsAccessExp(name) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Forms/CalculatorForm.vue?vue&type=script&lang=js":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Forms/CalculatorForm.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "CalculatorForm"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Forms/CalculatorForm.vue?vue&type=template&id=5b5f26d1":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Forms/CalculatorForm.vue?vue&type=template&id=5b5f26d1 ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Маршрут</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5\"><label>Місто-відправник</label><select class=\"custom-select\"><option>1</option></select></div><div class=\"col-5\"><label>Місто-одержувач</label><select class=\"custom-select\"><option>1</option></select></div></div></div><div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Тип послуги</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5\"><select class=\"custom-select\"><option>Відділення-відділення</option><option>Двері-двері</option><option>Двері-відділення</option><option>Відділення-двері</option></select></div></div></div><hr><div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Вид відправлення</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5\"><select class=\"custom-select\"><option>Посилки</option><option>Документи</option><option>Шини та диски</option><option>Пластик</option><option>Скло</option><option>Інше</option></select></div></div></div><div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Фактична вага (кг.)</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5 form-group\"><label>Вага</label><input type=\"text\" class=\"custom-control px-0 text-center\" style=\"width:60px;\"></div></div></div><div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Габарити (см.)</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-1 form-group\"><label>Довжина</label><input type=\"text\" value=\"1\" class=\"custom-control px-0 text-center\" style=\"width:60px;\"></div><div class=\"col-1 form-group ml-2\"><label>Ширина</label><input type=\"text\" value=\"1\" class=\"custom-control px-0 text-center\" style=\"width:60px;\"></div><div class=\"col-1 form-group ml-2\"><label>Висота</label><input type=\"text\" value=\"1\" class=\"custom-control px-0 text-center\" style=\"width:60px;\"></div></div></div><button type=\"submit\" class=\"btn btn-primary font-weight-bold\">Розрахувати ціну</button>", 7);
+
+var _hoisted_8 = [_hoisted_1];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", null, _hoisted_8);
+}
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -17429,7 +17467,7 @@ var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
 _components_index__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(function (element) {
   app.component(element.name, element);
 });
-app.mount('#application');
+app.mount('#application-vue');
 
 /***/ }),
 
@@ -17443,7 +17481,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([]);
+/* harmony import */ var _Forms_CalculatorForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Forms/CalculatorForm */ "./resources/js/components/Forms/CalculatorForm.vue");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([_Forms_CalculatorForm__WEBPACK_IMPORTED_MODULE_0__["default"]]);
 
 /***/ }),
 
@@ -17455,6 +17495,84 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/dist/exportHelper.js":
+/*!******************************************************!*\
+  !*** ./node_modules/vue-loader/dist/exportHelper.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+// runtime helper for setting properties on components
+// in a tree-shakable way
+exports["default"] = (sfc, props) => {
+    const target = sfc.__vccOpts || sfc;
+    for (const [key, val] of props) {
+        target[key] = val;
+    }
+    return target;
+};
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/CalculatorForm.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Forms/CalculatorForm.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CalculatorForm_vue_vue_type_template_id_5b5f26d1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalculatorForm.vue?vue&type=template&id=5b5f26d1 */ "./resources/js/components/Forms/CalculatorForm.vue?vue&type=template&id=5b5f26d1");
+/* harmony import */ var _CalculatorForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalculatorForm.vue?vue&type=script&lang=js */ "./resources/js/components/Forms/CalculatorForm.vue?vue&type=script&lang=js");
+/* harmony import */ var C_OpenServer_domains_laravel_test_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_OpenServer_domains_laravel_test_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CalculatorForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CalculatorForm_vue_vue_type_template_id_5b5f26d1__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/Forms/CalculatorForm.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/CalculatorForm.vue?vue&type=script&lang=js":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Forms/CalculatorForm.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CalculatorForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CalculatorForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CalculatorForm.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Forms/CalculatorForm.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/CalculatorForm.vue?vue&type=template&id=5b5f26d1":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Forms/CalculatorForm.vue?vue&type=template&id=5b5f26d1 ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CalculatorForm_vue_vue_type_template_id_5b5f26d1__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CalculatorForm_vue_vue_type_template_id_5b5f26d1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CalculatorForm.vue?vue&type=template&id=5b5f26d1 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Forms/CalculatorForm.vue?vue&type=template&id=5b5f26d1");
 
 
 /***/ }),
