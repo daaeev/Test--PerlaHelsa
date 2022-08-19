@@ -1,3 +1,13 @@
+### Для развертывания следует выполнить следующие команды:
+ - Выполнить команду `composer install`
+ - Создать файл конфигурации .env
+ - Заполнить нужные поля в файле .env
+ - Выполнить команду php artisan key:generate для генерации ключа шифрования
+ - Выполнить команду php artisan migrate для исполнения созданных миграций
+ - Выполнить команду php artisan db:seed для исполнения сидеров
+
+### После выполнения указанных действий приложение будет готово к работе.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
