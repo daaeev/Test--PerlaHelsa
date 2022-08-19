@@ -344,7 +344,7 @@ export default {
 				.post("/calculator/price", formData)
 				.then((res) => {
 					this.req_failed = '';
-					this.result_price = res?.data?.price ?? 0;
+					this.result_price = res?.data?.price?.toFixed(2) ?? 0;
 				})
 				.catch((err) => {
 					this.result_price = 0;
