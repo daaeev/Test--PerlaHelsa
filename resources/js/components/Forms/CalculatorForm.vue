@@ -9,14 +9,32 @@
 			<div class="col-10 row">
 				<div class="col-5">
 					<label>Місто-відправник</label>
-					<select class="custom-select">
-						<option>1</option>
+					<select class="custom-select" name="contry_sender">
+						<option value="Вінниця">Вінниця</option>
+						<option value="Дніпро">Дніпро</option>
+						<option value="Запоріжжя">Запоріжжя</option>
+						<option value="Київ">Київ</option>
+						<option value="Кривий Ріг">Кривий Ріг</option>
+						<option value="Миколаїв">Миколаїв</option>
+						<option value="Львів">Львів</option>
+						<option value="Одеса">Одеса</option>
+						<option value="Полтава">Полтава</option>
+						<option value="Харків">Харків</option>
 					</select>
 				</div>
 				<div class="col-5">
 					<label>Місто-одержувач</label>
-					<select class="custom-select">
-						<option>1</option>
+					<select class="custom-select" name="country_recipient">
+						<option value="Вінниця">Вінниця</option>
+						<option value="Дніпро">Дніпро</option>
+						<option value="Запоріжжя">Запоріжжя</option>
+						<option value="Київ">Київ</option>
+						<option value="Кривий Ріг">Кривий Ріг</option>
+						<option value="Миколаїв">Миколаїв</option>
+						<option value="Львів">Львів</option>
+						<option value="Одеса">Одеса</option>
+						<option value="Полтава">Полтава</option>
+						<option value="Харків">Харків</option>
 					</select>
 				</div>
 			</div>
@@ -29,7 +47,7 @@
 
 			<div class="col-10 row">
 				<div class="col-5">
-					<select class="custom-select">
+					<select class="custom-select" name="service_type">
 						<option>Відділення-відділення</option>
 						<option>Двері-двері</option>
 						<option>Двері-відділення</option>
@@ -47,13 +65,11 @@
 
 			<div class="col-10 row">
 				<div class="col-5">
-					<select class="custom-select">
-						<option>Посилки</option>
+					<select class="custom-select" name="send_type">
+						<option>Вантажі</option>
 						<option>Документи</option>
 						<option>Шини та диски</option>
-						<option>Пластик</option>
-						<option>Скло</option>
-						<option>Інше</option>
+						<option>Палети</option>
 					</select>
 				</div>
 			</div>
@@ -67,7 +83,7 @@
 			<div class="col-10 row">
 				<div class="col-5 form-group">
 					<label>Вага</label>
-					<input type="text" class="custom-control px-0 text-center" style="width: 60px">
+					<input type="text" class="custom-control px-0 text-center" name="actual_weight" style="width: 60px">
 				</div>
 			</div>
 		</div>
@@ -80,15 +96,15 @@
 			<div class="col-10 row">
 				<div class="col-1 form-group">
 					<label>Довжина</label>
-					<input type="text" value="1" class="custom-control px-0 text-center" style="width:60px">
+					<input type="text" value="1" class="custom-control px-0 text-center" name="length" style="width:60px">
 				</div>
 				<div class="col-1 form-group ml-2">
 					<label>Ширина</label>
-					<input type="text" value="1" class="custom-control px-0 text-center" style="width:60px">
+					<input type="text" value="1" class="custom-control px-0 text-center" name="width" style="width:60px">
 				</div>
 				<div class="col-1 form-group ml-2">
 					<label>Висота</label>
-					<input type="text" value="1" class="custom-control px-0 text-center" style="width:60px">
+					<input type="text" value="1" class="custom-control px-0 text-center" name="height" style="width:60px">
 				</div>
 			</div>
 		</div>
