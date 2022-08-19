@@ -138,15 +138,12 @@ class PriceCalculatorRequest extends FormRequest
     protected function allowedDiskOrTire(): array
     {
         return [
-            'R 22,5',
-            'R 17,5',
-            'R 19,5',
+            'R 17,5-19,5',
             'R 20',
+            'R 21-22,5',
             'r 13-14',
             'r 15-17',
-            'r 18-19',
-            'r 20-21',
-            'r 23',
+            'r 18-23',
         ];
     }
 
