@@ -19903,16 +19903,26 @@ __webpack_require__.r(__webpack_exports__);
       packages_count: 1,
       pallets_count: 1,
       tires_count: 0,
-      disks_count: 0
+      disks_count: 0,
+      req_failed: '',
+      result_price: 0
     };
   },
   methods: {
     submitForm: function submitForm() {
+      var _this = this;
+
       var formData = new FormData(document.querySelector("#price-calculator-form"));
       _axios_api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/calculator/price", formData).then(function (res) {
-        return console.log(res.data);
+        var _res$data$price, _res$data;
+
+        _this.req_failed = '';
+        _this.result_price = (_res$data$price = res === null || res === void 0 ? void 0 : (_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.price) !== null && _res$data$price !== void 0 ? _res$data$price : 0;
       })["catch"](function (err) {
-        return console.log(err.response.data);
+        var _err$response$data$er, _err$response, _err$response$data;
+
+        _this.result_price = 0;
+        _this.req_failed = (_err$response$data$er = err === null || err === void 0 ? void 0 : (_err$response = err.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.error) !== null && _err$response$data$er !== void 0 ? _err$response$data$er : 'Щось пішло не так';
       });
     },
 
@@ -20282,6 +20292,13 @@ var _hoisted_91 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
+var _hoisted_92 = {
+  key: 3,
+  "class": "alert alert-danger"
+};
+
+var _hoisted_93 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Ціна за відправку: ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
     id: "price-calculator-form",
@@ -20536,7 +20553,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_91], 32
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_91, $data.req_failed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_92, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.req_failed), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, [_hoisted_93, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.result_price) + " грн.", 1
+  /* TEXT */
+  )])], 32
   /* HYDRATE_EVENTS */
   );
 }

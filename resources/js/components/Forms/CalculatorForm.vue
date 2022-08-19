@@ -60,7 +60,7 @@
 				</div>
 			</div>
 		</div>
-		<hr />
+		<hr/>
 		<div class="row pb-4">
 			<div class="col-2 d-flex">
 				<p class="col-form-label d-flex align-items-center">Вид відправлення</p>
@@ -306,6 +306,10 @@
 		</div>
 
 		<button type="submit" class="btn btn-primary font-weight-bold">Розрахувати ціну</button>
+
+		<p class="alert alert-danger" v-if="req_failed">{{ req_failed }}</p>
+
+		<h3>Ціна за відправку: <b>{{ result_price }} грн.</b></h3>
 	</form>
 </template>
 
@@ -323,6 +327,10 @@ export default {
 			pallets_count: 1,
 			tires_count: 0,
 			disks_count: 0,
+
+			req_failed: '',
+
+			result_price: 0,
 		};
 	},
 
@@ -334,8 +342,14 @@ export default {
 
 			axios
 				.post("/calculator/price", formData)
-				.then((res) => console.log(res.data))
-				.catch((err) => console.log(err.response.data));
+				.then((res) => {
+					this.req_failed = '';
+					this.result_price = res?.data?.price ?? 0;
+				})
+				.catch((err) => {
+					this.result_price = 0;
+					this.req_failed = err?.response?.data?.error ?? 'Щось пішло не так';
+				});
 		},
 
 		/**
