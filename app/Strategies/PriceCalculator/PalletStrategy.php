@@ -9,7 +9,7 @@ use Exception;
 class PalletStrategy implements Interfaces\CalculatorStrategyInterface
 {
     public function __construct(
-        protected TariffParserInterface  $tariffParser,
+        protected TariffParserInterface  $tariff,
         protected PriceCalculatorRequest $validator
     ) {
     }
@@ -28,8 +28,9 @@ class PalletStrategy implements Interfaces\CalculatorStrategyInterface
 
         $price = 0;
         $is_local = $data['country_sender'] === $data['country_recipient'];
+        $pallets = $data['pallet'] ?? [];
 
-        foreach ($data['pallet'] as $pallet) {
+        foreach ($pallets as $pallet) {
             $calculated_price = 0;
 
             // Расчет цены за размер
@@ -58,8 +59,8 @@ class PalletStrategy implements Interfaces\CalculatorStrategyInterface
         $price = 0;
 
         // Если указаная стоимость больше 500 грн.
-        if ($pallet_price > 500) {
-            $price += ($pallet_price * 0.05) / 100;
+        if ($pallet_price > $this->tariff->getWeightForReceivePercent()) {
+            $price += ($pallet_price * $this->tariff->getReceivePercentForWeight()) / 100;
         }
 
         return $price;
@@ -76,29 +77,13 @@ class PalletStrategy implements Interfaces\CalculatorStrategyInterface
     {
         $price = 0;
 
-        if ($size === '0-0,49') { // Размер от 0 до 0,49
-            if ($is_local) { // Локальная доставка
-                $price += 500;
-            } else { // Не локальная доставка
-                $price += 850;
-            }
-        } else if ($size === '0,5-0,99') { // Размер от 0,5 до 0,99
-            if ($is_local) { // Локальная доставка
-                $price += 850;
-            } else { // Не локальная доставка
-                $price += 1700;
-            }
-        } else if ($size === '1-1,49') { // Размер от 1 да 1,49
-            if ($is_local) { // Локальная доставка
-                $price += 1300;
-            } else { // Не локальная доставка
-                $price += 2550;
-            }
-        } else if ($size === '1,5-2') { // Размер от 1,5 до 2
-            if ($is_local) { // Локальная доставка
-                $price += 1700;
-            } else { // Не локальная доставка
-                $price += 3450;
+        foreach ($this->tariff->getPalletsSizePrices() as $tariffSize => $tariffPrices) {
+            if ($size === $tariffSize) {
+                if ($is_local) { // Локальная доставка
+                    $price += $tariffPrices['local'];
+                } else { // Не локальная доставка
+                    $price += $tariffPrices['noLocal'];
+                }
             }
         }
 

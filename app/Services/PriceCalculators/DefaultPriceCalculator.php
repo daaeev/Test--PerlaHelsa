@@ -12,10 +12,10 @@ class DefaultPriceCalculator implements PriceCalculatorInterface
     /**
      * @inheritDoc
      */
-    public function calculate(PriceCalculatorRequest $validator): int|float
+    public function calculate(PriceCalculatorRequest $validate): int|float
     {
         try {
-            $send_type = $validator->validated('send_type');
+            $send_type = $validate->validated('send_type');
         } catch (\Throwable) {
             throw new Exception('Передані неправильні дані', 422);
         }
@@ -23,6 +23,6 @@ class DefaultPriceCalculator implements PriceCalculatorInterface
         $handlers = HandlersMap::map();
         $strategy = app($handlers[$send_type]);
 
-        return $strategy->execute($validator);
+        return $strategy->execute();
     }
 }

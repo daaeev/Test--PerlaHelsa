@@ -9,13 +9,13 @@ use App\Strategies\PriceCalculator\Interfaces\CalculatorStrategyInterface;
 class DocumentStrategy implements CalculatorStrategyInterface
 {
     public function __construct(
-        protected TariffParserInterface  $tariffParser,
+        protected TariffParserInterface  $tariff,
         protected PriceCalculatorRequest $validator
     ) {
     }
 
     public function execute(): int|float
     {
-        return 45;
+        return $this->tariff->getDocumentsDeliveryPrice();
     }
 }

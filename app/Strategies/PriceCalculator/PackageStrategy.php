@@ -10,7 +10,7 @@ use Exception;
 class PackageStrategy implements CalculatorStrategyInterface
 {
     public function __construct(
-        protected TariffParserInterface  $tariffParser,
+        protected TariffParserInterface  $tariff,
         protected PriceCalculatorRequest $validator
     ) {
     }
@@ -19,7 +19,8 @@ class PackageStrategy implements CalculatorStrategyInterface
      * @inheritDoc
      * @throws Exception
      */
-    public function execute(): int|float {
+    public function execute(): int|float
+    {
         try {
             $data = $this->validator->validated();
         } catch (\Throwable) {
@@ -27,10 +28,10 @@ class PackageStrategy implements CalculatorStrategyInterface
         }
 
         $price = 0;
-        $more_than_one = false;
         $is_local = $data['country_sender'] === $data['country_recipient'];
+        $packages = $data['package'] ?? [];
 
-        foreach ($data['package'] as $package) {
+        foreach ($packages as $package) {
             $calculated_price = 0;
             $weight = $package['weight'];
             $package_price = $package['price'];
@@ -38,7 +39,7 @@ class PackageStrategy implements CalculatorStrategyInterface
             $service_type = $data['service_type'];
 
             // Расчет цены по массе
-            $calculated_price += $this->calculateWeightPrice($weight, $is_local, $more_than_one);
+            $calculated_price += $this->calculateWeightPrice($weight, $is_local);
 
             // Расчет цены за курьера
             $calculated_price += $this->calculateCourierPrice($weight, $service_type);
@@ -50,8 +51,6 @@ class PackageStrategy implements CalculatorStrategyInterface
             $calculated_price *= $count;
 
             $price += $calculated_price;
-
-            $more_than_one = true;
         }
 
         return $price;
@@ -67,8 +66,8 @@ class PackageStrategy implements CalculatorStrategyInterface
     {
         $price = 0;
 
-        if ($package_price > $tariffParser) {
-            $price += ($package_price * 0.05) / 100;
+        if ($package_price > $this->tariff->getWeightForReceivePercent()) {
+            $price += ($package_price * $this->tariff->getReceivePercentForWeight()) / 100;
         }
 
         return $price;
@@ -79,49 +78,27 @@ class PackageStrategy implements CalculatorStrategyInterface
      *
      * @param integer|float $weight
      * @param boolean $is_local
-     * @param boolean $more_than_one
      * @return integer|float
      */
     protected function calculateWeightPrice(
-        int|float $weight, 
-        bool $is_local, 
-        bool $more_than_one
+        int|float $weight,
+        bool      $is_local,
     ): int|float {
         $price = 0;
 
-        if ($weight < 2) {
-            // Скидка за каждое следующее место
-            if ($more_than_one) {
-                $price += 20;
-            } else if ($is_local) { // Если доставка локальная
-                $price += 40;
-            } else { // Если доставка не локальная
-                $price += 60;
-            }
-        } else if ($weight < 10) {
-            // Скидка за каждое следующее место
-            if ($more_than_one) {
-                $price += 40;
-            } else if ($is_local) { // Если доставка локальная
-                $price += 60;
-            } else { // Если доставка не локальная
-                $price += 80;
-            }
-        } else if ($weight < 30) {
-            // Скидка за каждое следующее место
-            if ($more_than_one) {
-                $price += 80;
-            } else if ($is_local) { // Если доставка локальная
-                $price += 80;
-            } else { // Если доставка не локальная
-                $price += 120;
-            }
-        } else {
-            // Если доставка локальная
-            if ($is_local) {
-                $price += $weight * 3;
-            } else {
-                $price += $weight * 5;
+        foreach ($this->tariff->getPackageWeightPrices() as $tariffWeightDiapason => $tariffPrice) {
+            list($weightFrom, $weightTo) = explode('-', $tariffWeightDiapason);
+
+            // Если цена ОТ удовлитворительна
+            if ($weight >= $weightFrom) {
+                // Если указана ценна до и она удовлитворитльна ИЛИ не указана ценна до
+                if ((!empty($weightTo) && $weight < $weightTo) || empty($weightTo)) {
+                    if ($is_local) { // Если доставка локальная
+                        $price += $tariffPrice['local'];
+                    } else { // Если доставка не локальная
+                        $price += $tariffPrice['noLocal'];;
+                    }
+                }
             }
         }
 
@@ -137,25 +114,24 @@ class PackageStrategy implements CalculatorStrategyInterface
      */
     protected function calculateCourierPrice(int|float $weight, string $service_type): int|float
     {
-        $price = 0; 
+        $price = 0;
 
-        if ($weight < 30) { // Если маса до 30 кг
-            if ($service_type == 'Двері-двері') {
-                $price += (30 * 2);
-            } else if (
-                $service_type == 'Двері-відділення'
-                || $service_type == 'Відділення-двері'
-            ) {
-                $price += 30;
-            }
-        } else { // Если маса больше или равна 30 кг
-            if ($service_type == 'Двері-двері') {
-                $price += (90 * (floor($weight / 100))) * 2;
-            } else if (
-                $service_type == 'Двері-відділення'
-                || $service_type == 'Відділення-двері'
-            ) {
-                $price += (90 * (floor($weight / 100)));
+        foreach ($this->tariff->getPackageWeightCourierPrices() as $tariffWeightDiapason => $tariffPrice) {
+            list($weightFrom, $weightTo) = explode('-', $tariffWeightDiapason);
+
+            // Если цена ОТ удовлитворительна
+            if ($weight >= $weightFrom) {
+                // Если указана ценна до и она удовлитворитльна ИЛИ не указана ценна до
+                if ((!empty($weightTo) && $weight <= $weightTo) || empty($weightTo)) {
+                    if ($service_type == 'Двері-двері') {
+                        $price += ($tariffPrice * 2);
+                    } else if (
+                        $service_type == 'Двері-відділення'
+                        || $service_type == 'Відділення-двері'
+                    ) {
+                        $price += $tariffPrice;
+                    }
+                }
             }
         }
 

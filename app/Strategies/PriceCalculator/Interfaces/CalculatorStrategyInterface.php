@@ -8,11 +8,11 @@ use App\Services\TariffParser\Interfaces\TariffParserInterface;
 interface CalculatorStrategyInterface
 {
     /**
-     * @param TariffParserInterface $tariffParser
+     * @param TariffParserInterface $tariff
      * @param PriceCalculatorRequest $validator
      */
     public function __construct(
-        TariffParserInterface $tariffParser,
+        TariffParserInterface $tariff,
         PriceCalculatorRequest $validator
     );
 
