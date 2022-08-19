@@ -3,19 +3,25 @@
 namespace App\Strategies\PriceCalculator;
 
 use App\Http\Requests\PriceCalculatorRequest;
+use App\Services\TariffParser\Interfaces\TariffParserInterface;
 use App\Strategies\PriceCalculator\Interfaces\CalculatorStrategyInterface;
 use Exception;
 
 class PackageStrategy implements CalculatorStrategyInterface
 {
+    public function __construct(
+        protected TariffParserInterface  $tariffParser,
+        protected PriceCalculatorRequest $validator
+    ) {
+    }
+
     /**
      * @inheritDoc
      * @throws Exception
      */
-    public function execute(PriceCalculatorRequest $validator): int|float
-    {
+    public function execute(): int|float {
         try {
-            $data = $validator->validated();
+            $data = $this->validator->validated();
         } catch (\Throwable) {
             throw new Exception('Передані неправильні дані', 422);
         }
@@ -61,7 +67,7 @@ class PackageStrategy implements CalculatorStrategyInterface
     {
         $price = 0;
 
-        if ($package_price > 500) {
+        if ($package_price > $tariffParser) {
             $price += ($package_price * 0.05) / 100;
         }
 

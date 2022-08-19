@@ -3,18 +3,25 @@
 namespace App\Strategies\PriceCalculator;
 
 use App\Http\Requests\PriceCalculatorRequest;
+use App\Services\TariffParser\Interfaces\TariffParserInterface;
 use Exception;
 
 class PalletStrategy implements Interfaces\CalculatorStrategyInterface
 {
+    public function __construct(
+        protected TariffParserInterface  $tariffParser,
+        protected PriceCalculatorRequest $validator
+    ) {
+    }
+
     /**
      * @inheritDoc
      * @throws Exception
      */
-    public function execute(PriceCalculatorRequest $validator): int|float
+    public function execute(): int|float
     {
         try {
-            $data = $validator->validated();
+            $data = $this->validator->validated();
         } catch (\Throwable) {
             throw new Exception('Передані неправильні дані', 422);
         }
