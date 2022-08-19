@@ -3,7 +3,7 @@
 		<div class="row pb-4">
 			<div class="col-2 d-flex">
 				<p class="col-form-label d-flex align-items-center">Маршрут</p>
-				<p class="m-0 pl-2 d-flex align-items-center">
+				<p class="m-0 pl-2 d-flex align-items-center" v-if="city_from_validate && city_to_validate">
 					<i class="material-icons text-success">done</i>
 				</p>
 			</div>
@@ -11,32 +11,32 @@
 			<div class="col-10 row">
 				<div class="col-5">
 					<label>Місто-відправник</label>
-					<select class="custom-select" name="country_sender" required>
-						<option value="Вінниця">Вінниця</option>
-						<option value="Дніпро">Дніпро</option>
-						<option value="Запоріжжя">Запоріжжя</option>
-						<option value="Київ">Київ</option>
-						<option value="Кривий Ріг">Кривий Ріг</option>
-						<option value="Миколаїв">Миколаїв</option>
-						<option value="Львів">Львів</option>
-						<option value="Одеса">Одеса</option>
-						<option value="Полтава">Полтава</option>
-						<option value="Харків">Харків</option>
+					<select class="custom-select" name="country_sender" required v-model="city_from">
+						<option>Вінниця</option>
+						<option>Дніпро</option>
+						<option>Запоріжжя</option>
+						<option>Київ</option>
+						<option>Кривий Ріг</option>
+						<option>Миколаїв</option>
+						<option>Львів</option>
+						<option>Одеса</option>
+						<option>Полтава</option>
+						<option>Харків</option>
 					</select>
 				</div>
 				<div class="col-5">
 					<label>Місто-одержувач</label>
-					<select class="custom-select" name="country_recipient" required>
-						<option value="Вінниця">Вінниця</option>
-						<option value="Дніпро">Дніпро</option>
-						<option value="Запоріжжя">Запоріжжя</option>
-						<option value="Київ">Київ</option>
-						<option value="Кривий Ріг">Кривий Ріг</option>
-						<option value="Миколаїв">Миколаїв</option>
-						<option value="Львів">Львів</option>
-						<option value="Одеса">Одеса</option>
-						<option value="Полтава">Полтава</option>
-						<option value="Харків">Харків</option>
+					<select class="custom-select" name="country_recipient" required v-model="city_to">
+						<option>Вінниця</option>
+						<option>Дніпро</option>
+						<option>Запоріжжя</option>
+						<option>Київ</option>
+						<option>Кривий Ріг</option>
+						<option>Миколаїв</option>
+						<option>Львів</option>
+						<option>Одеса</option>
+						<option>Полтава</option>
+						<option>Харків</option>
 					</select>
 				</div>
 			</div>
@@ -44,14 +44,14 @@
 		<div class="row pb-4">
 			<div class="col-2 d-flex">
 				<p class="col-form-label d-flex align-items-center">Тип послуги</p>
-				<p class="m-0 pl-2 d-flex align-items-center">
+				<p class="m-0 pl-2 d-flex align-items-center" v-if="service_type_validate">
 					<i class="material-icons text-success">done</i>
 				</p>
 			</div>
 
 			<div class="col-10 row">
 				<div class="col-5">
-					<select class="custom-select" name="service_type" required>
+					<select class="custom-select" name="service_type" required v-model="service_type">
 						<option>Відділення-відділення</option>
 						<option>Двері-двері</option>
 						<option>Двері-відділення</option>
@@ -64,7 +64,7 @@
 		<div class="row pb-4">
 			<div class="col-2 d-flex">
 				<p class="col-form-label d-flex align-items-center">Вид відправлення</p>
-				<p class="m-0 pl-2 d-flex align-items-center">
+				<p class="m-0 pl-2 d-flex align-items-center" v-if="send_type_validate">
 					<i class="material-icons text-success">done</i>
 				</p>
 			</div>
@@ -321,7 +321,15 @@ export default {
 
 	data() {
 		return {
-			send_type: "Вантажі",
+			send_type_validate: true,
+			city_from_validate: true,
+			city_to_validate: true,
+			service_type_validate: true,
+
+			send_type: 'Вантажі',
+			city_from: 'Вінниця',
+			city_to: 'Вінниця',
+			service_type: 'Відділення-відділення',
 
 			packages_count: 1,
 			pallets_count: 1,
@@ -336,6 +344,11 @@ export default {
 
 	methods: {
 		submitForm() {
+			if (!this.validate()) {
+				this.req_failed = 'Деякі дані не заповнені!';
+				return;
+			}
+
 			const formData = new FormData(
 				document.querySelector("#price-calculator-form")
 			);
@@ -350,6 +363,17 @@ export default {
 					this.result_price = 0;
 					this.req_failed = err?.response?.data?.error ?? 'Щось пішло не так';
 				});
+		},
+
+		/**
+		 * Прошла ли форма валидацию
+		 * @returns {boolean}
+		 */
+		validate() {
+			return (this.send_type_validate === true)
+				&& (this.city_to_validate === true)
+				&& (this.city_from_validate === true)
+				&& (this.service_type_validate === true);
 		},
 
 		/**
@@ -420,6 +444,21 @@ export default {
 					"#price-calculator-form #tires-disks .disk-" + id
 				)
 				.remove();
+		},
+	},
+
+	watch: {
+		send_type(new_value, old_value) {
+			this.send_type_validate = ((typeof new_value === 'string') && (new_value.length > 0));
+		},
+		city_from(new_value, old_value) {
+			this.city_from_validate = ((typeof new_value === 'string') && (new_value.length > 0));
+		},
+		city_to(new_value, old_value) {
+			this.city_to_validate = ((typeof new_value === 'string') && (new_value.length > 0));
+		},
+		service_type(new_value, old_value) {
+			this.service_type_validate = ((typeof new_value === 'string') && (new_value.length > 0));
 		},
 	},
 };
