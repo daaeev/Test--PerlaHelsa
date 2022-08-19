@@ -83,28 +83,7 @@
 			<div class="col-10 row">
 				<div class="col-5 form-group">
 					<label>Вага</label>
-					<input type="text" class="custom-control px-0 text-center" name="actual_weight" style="width: 60px">
-				</div>
-			</div>
-		</div>
-		<div class="row pb-4">
-			<div class="col-2 d-flex">
-				<p class="col-form-label d-flex align-items-center">Габарити (см.)</p>
-				<p class="m-0 pl-2 d-flex align-items-center"><i class="material-icons text-success">done</i></p>
-			</div>
-
-			<div class="col-10 row">
-				<div class="col-1 form-group">
-					<label>Довжина</label>
-					<input type="text" value="1" class="custom-control px-0 text-center" name="length" style="width:60px">
-				</div>
-				<div class="col-1 form-group ml-2">
-					<label>Ширина</label>
-					<input type="text" value="1" class="custom-control px-0 text-center" name="width" style="width:60px">
-				</div>
-				<div class="col-1 form-group ml-2">
-					<label>Висота</label>
-					<input type="text" value="1" class="custom-control px-0 text-center" name="height" style="width:60px">
+					<input type="text" class="custom-control px-0 text-center" name="actual_weight" value="1" style="width: 60px">
 				</div>
 			</div>
 		</div>
