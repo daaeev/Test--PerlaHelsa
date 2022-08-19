@@ -2,13 +2,17 @@
 
 namespace App\Services\PriceCalculators\Interfaces;
 
+use App\Http\Requests\PriceCalculatorRequest;
+use Exception;
+
 interface PriceCalculatorInterface
 {
     /**
      * Расчитать цену за доставку
      *
-     * @param array $data данные для расчета цены доставки
-     * @return integer|false
+     * @param PriceCalculatorRequest $validate данные для расчета цены доставки
+     * @return integer
+     * @throws Exception при ошибке расчета цены
      */
-    public function calculate(array $data): int|false;
+    public function calculate(PriceCalculatorRequest $validate): int;
 }
