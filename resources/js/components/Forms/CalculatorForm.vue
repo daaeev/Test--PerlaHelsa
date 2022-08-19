@@ -182,16 +182,16 @@
 				<p class="col-form-label d-flex align-items-center">Місця</p>
 			</div>
 
-			<button type="button" class="btn btn-success" @click="addPallete">Додати</button>
+			<button type="button" class="btn btn-success" @click="addPallet">Додати</button>
 
-			<div class="col-10 row" :class="'pallete-' + index" v-for="index in pallets_count" :key="index">
+			<div class="col-10 row" :class="'pallet-' + index" v-for="index in pallets_count" :key="index">
 				<div class="col-5 form-group">
 					<label>Тип палети</label>
-					<select class="custom-select" :name="'pallete[' + index + '][type]'" required>
-						<option>Паллета от 1,5 м2 до 2 м2</option>
-						<option>Паллета от 1 м2 до 1,49 м2</option>
-						<option>Паллета от 0,5 м2 до 0,99 м2</option>
-						<option>Паллета до 0,49 м2</option>
+					<select class="custom-select" :name="'pallet[' + index + '][type]'" required>
+						<option value="1,5-2">Паллета от 1,5 м2 до 2 м2</option>
+						<option value="1-1,49">Паллета от 1 м2 до 1,49 м2</option>
+						<option value="0,5-0,99">Паллета от 0,5 м2 до 0,99 м2</option>
+						<option value="0-0,49">Паллета до 0,49 м2</option>
 					</select>
 				</div>
 				<div class="col-1 form-group">
@@ -199,7 +199,7 @@
 					<input
 						type="text"
 						class="custom-control px-0 text-center"
-						:name="'pallete[' + index + '][price]'"
+						:name="'pallet[' + index + '][price]'"
 						style="width: 60px"
 						placeholder="грн."
 						required
@@ -210,7 +210,7 @@
 					<input
 						type="number"
 						class="custom-control px-0 text-center"
-						:name="'pallete[' + index + '][count]'"
+						:name="'pallet[' + index + '][count]'"
 						value="1"
 						style="width: 60px"
 						placeholder="од."
@@ -221,7 +221,7 @@
 				</div>
 				<div class="col-1 form-group ml-3">
 					<label>Видалити</label>
-					<i class="material-icons" @click="removePallete(index)" style="cursor: pointer">clear</i>
+					<i class="material-icons" @click="removePallet(index)" style="cursor: pointer">clear</i>
 				</div>
 			</div>
 		</div>
@@ -341,7 +341,7 @@ export default {
 		/**
 		 * Добавить палет
 		 */
-		addPallete() {
+		addPallet() {
 			this.pallets_count++;
 		},
 
@@ -373,7 +373,7 @@ export default {
 		/**
 		 * Удалить палет
 		 */
-		removePallete(id) {
+		removePallet(id) {
 			document
 				.querySelector("#price-calculator-form #pallets .pallete-" + id)
 				.remove();

@@ -17446,7 +17446,7 @@ __webpack_require__.r(__webpack_exports__);
     /**
      * Добавить палет
      */
-    addPallete: function addPallete() {
+    addPallet: function addPallet() {
       this.pallets_count++;
     },
 
@@ -17474,7 +17474,7 @@ __webpack_require__.r(__webpack_exports__);
     /**
      * Удалить палет
      */
-    removePallete: function removePallete(id) {
+    removePallet: function removePallet(id) {
       document.querySelector("#price-calculator-form #pallets .pallete-" + id).remove();
     },
 
@@ -17655,19 +17655,27 @@ var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_41 = ["name"];
 
-var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллета от 1,5 м2 до 2 м2", -1
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "1,5-2"
+}, "Паллета от 1,5 м2 до 2 м2", -1
 /* HOISTED */
 );
 
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллета от 1 м2 до 1,49 м2", -1
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "1-1,49"
+}, "Паллета от 1 м2 до 1,49 м2", -1
 /* HOISTED */
 );
 
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллета от 0,5 м2 до 0,99 м2", -1
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "0,5-0,99"
+}, "Паллета от 0,5 м2 до 0,99 м2", -1
 /* HOISTED */
 );
 
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллета до 0,49 м2", -1
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "0-0,49"
+}, "Паллета до 0,49 м2", -1
 /* HOISTED */
 );
 
@@ -17971,22 +17979,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "btn btn-success",
     onClick: _cache[2] || (_cache[2] = function () {
-      return $options.addPallete && $options.addPallete.apply($options, arguments);
+      return $options.addPallet && $options.addPallet.apply($options, arguments);
     })
   }, "Додати"), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.pallets_count, function (index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-10 row", 'pallete-' + index]),
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-10 row", 'pallet-' + index]),
       key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [_hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
       "class": "custom-select",
-      name: 'pallete[' + index + '][type]',
+      name: 'pallet[' + index + '][type]',
       required: ""
     }, _hoisted_46, 8
     /* PROPS */
     , _hoisted_41)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [_hoisted_48, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "text",
       "class": "custom-control px-0 text-center",
-      name: 'pallete[' + index + '][price]',
+      name: 'pallet[' + index + '][price]',
       style: {
         "width": "60px"
       },
@@ -17997,7 +18005,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_49)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [_hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "number",
       "class": "custom-control px-0 text-center",
-      name: 'pallete[' + index + '][count]',
+      name: 'pallet[' + index + '][count]',
       value: "1",
       style: {
         "width": "60px"
@@ -18011,7 +18019,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_52)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [_hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
       "class": "material-icons",
       onClick: function onClick($event) {
-        return $options.removePallete(index);
+        return $options.removePallet(index);
       },
       style: {
         "cursor": "pointer"
