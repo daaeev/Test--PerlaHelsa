@@ -17425,7 +17425,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "CalculatorForm"
+  name: "CalculatorForm",
+  data: function data() {
+    return {
+      send_type: "Вантажі",
+      packages_count: 1,
+      pallets_count: 1,
+      tires_count: 0,
+      disks_count: 0
+    };
+  },
+  methods: {
+    /**
+     * Добавить посылку
+     */
+    addPackage: function addPackage() {
+      this.packages_count++;
+    },
+
+    /**
+     * Добавить палет
+     */
+    addPallete: function addPallete() {
+      this.pallets_count++;
+    },
+
+    /**
+     * Добавить шину
+     */
+    addTire: function addTire() {
+      this.tires_count++;
+    },
+
+    /**
+     * Добавить диск
+     */
+    addDisk: function addDisk() {
+      this.disks_count++;
+    },
+
+    /**
+     * Удалить посылку
+     */
+    removePackage: function removePackage(id) {
+      document.querySelector("#price-calculator-form #packages .package-" + id).remove();
+    },
+
+    /**
+     * Удалить палет
+     */
+    removePallete: function removePallete(id) {
+      document.querySelector("#price-calculator-form #pallets .pallete-" + id).remove();
+    },
+
+    /**
+     * Удалить шину
+     */
+    removeTire: function removeTire(id) {
+      document.querySelector("#price-calculator-form #tires-disks .tire-" + id).remove();
+    },
+
+    /**
+     * Удалить диск
+     */
+    removeDisk: function removeDisk(id) {
+      document.querySelector("#price-calculator-form #tires-disks .disk-" + id).remove();
+    }
+  }
 });
 
 /***/ }),
@@ -17442,12 +17508,612 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  id: "price-calculator-form"
+};
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Маршрут</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5\"><label>Місто-відправник</label><select class=\"custom-select\" name=\"contry_sender\"><option value=\"Вінниця\">Вінниця</option><option value=\"Дніпро\">Дніпро</option><option value=\"Запоріжжя\">Запоріжжя</option><option value=\"Київ\">Київ</option><option value=\"Кривий Ріг\">Кривий Ріг</option><option value=\"Миколаїв\">Миколаїв</option><option value=\"Львів\">Львів</option><option value=\"Одеса\">Одеса</option><option value=\"Полтава\">Полтава</option><option value=\"Харків\">Харків</option></select></div><div class=\"col-5\"><label>Місто-одержувач</label><select class=\"custom-select\" name=\"country_recipient\"><option value=\"Вінниця\">Вінниця</option><option value=\"Дніпро\">Дніпро</option><option value=\"Запоріжжя\">Запоріжжя</option><option value=\"Київ\">Київ</option><option value=\"Кривий Ріг\">Кривий Ріг</option><option value=\"Миколаїв\">Миколаїв</option><option value=\"Львів\">Львів</option><option value=\"Одеса\">Одеса</option><option value=\"Полтава\">Полтава</option><option value=\"Харків\">Харків</option></select></div></div></div><div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Тип послуги</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5\"><select class=\"custom-select\" name=\"service_type\"><option>Відділення-відділення</option><option>Двері-двері</option><option>Двері-відділення</option><option>Відділення-двері</option></select></div></div></div><hr><div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Вид відправлення</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5\"><select class=\"custom-select\" name=\"send_type\"><option>Вантажі</option><option>Документи</option><option>Шини та диски</option><option>Палети</option></select></div></div></div><div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Фактична вага (кг.)</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5 form-group\"><label>Вага</label><input type=\"text\" class=\"custom-control px-0 text-center\" name=\"actual_weight\" value=\"1\" style=\"width:60px;\"></div></div></div><button type=\"submit\" class=\"btn btn-primary font-weight-bold\">Розрахувати ціну</button>", 6);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Маршрут</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5\"><label>Місто-відправник</label><select class=\"custom-select\" name=\"contry_sender\" required><option value=\"Вінниця\">Вінниця</option><option value=\"Дніпро\">Дніпро</option><option value=\"Запоріжжя\">Запоріжжя</option><option value=\"Київ\">Київ</option><option value=\"Кривий Ріг\">Кривий Ріг</option><option value=\"Миколаїв\">Миколаїв</option><option value=\"Львів\">Львів</option><option value=\"Одеса\">Одеса</option><option value=\"Полтава\">Полтава</option><option value=\"Харків\">Харків</option></select></div><div class=\"col-5\"><label>Місто-одержувач</label><select class=\"custom-select\" name=\"country_recipient\" required><option value=\"Вінниця\">Вінниця</option><option value=\"Дніпро\">Дніпро</option><option value=\"Запоріжжя\">Запоріжжя</option><option value=\"Київ\">Київ</option><option value=\"Кривий Ріг\">Кривий Ріг</option><option value=\"Миколаїв\">Миколаїв</option><option value=\"Львів\">Львів</option><option value=\"Одеса\">Одеса</option><option value=\"Полтава\">Полтава</option><option value=\"Харків\">Харків</option></select></div></div></div><div class=\"row pb-4\"><div class=\"col-2 d-flex\"><p class=\"col-form-label d-flex align-items-center\">Тип послуги</p><p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p></div><div class=\"col-10 row\"><div class=\"col-5\"><select class=\"custom-select\" name=\"service_type\" required><option>Відділення-відділення</option><option>Двері-двері</option><option>Двері-відділення</option><option>Відділення-двері</option></select></div></div></div><hr>", 3);
 
-var _hoisted_7 = [_hoisted_1];
+var _hoisted_5 = {
+  "class": "row pb-4"
+};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-2 d-flex"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "col-form-label d-flex align-items-center"
+}, "Вид відправлення"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "m-0 pl-2 d-flex align-items-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "material-icons text-success"
+}, "done")])], -1
+/* HOISTED */
+);
+
+var _hoisted_7 = {
+  "class": "col-10 row"
+};
+var _hoisted_8 = {
+  "class": "col-5"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Вантажі", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Документи", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Шини та диски", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллети", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = [_hoisted_9, _hoisted_10, _hoisted_11, _hoisted_12];
+var _hoisted_14 = {
+  key: 0,
+  "class": "row pb-4",
+  id: "packages"
+};
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-2 d-flex"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "col-form-label d-flex align-items-center"
+}, "Місця")], -1
+/* HOISTED */
+);
+
+var _hoisted_16 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Кількість", -1
+/* HOISTED */
+);
+
+var _hoisted_18 = ["name"];
+var _hoisted_19 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Вартість", -1
+/* HOISTED */
+);
+
+var _hoisted_21 = ["name"];
+var _hoisted_22 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Вага", -1
+/* HOISTED */
+);
+
+var _hoisted_24 = ["name"];
+var _hoisted_25 = {
+  "class": "col-1 form-group ml-2"
+};
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Довжина", -1
+/* HOISTED */
+);
+
+var _hoisted_27 = ["name"];
+var _hoisted_28 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Ширина", -1
+/* HOISTED */
+);
+
+var _hoisted_30 = ["name"];
+var _hoisted_31 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Висота", -1
+/* HOISTED */
+);
+
+var _hoisted_33 = ["name"];
+var _hoisted_34 = {
+  "class": "col-1 form-group ml-3"
+};
+
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Видалити", -1
+/* HOISTED */
+);
+
+var _hoisted_36 = ["onClick"];
+var _hoisted_37 = {
+  key: 1,
+  "class": "row pb-4",
+  id: "pallets"
+};
+
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-2 d-flex"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "col-form-label d-flex align-items-center"
+}, "Місця")], -1
+/* HOISTED */
+);
+
+var _hoisted_39 = {
+  "class": "col-5 form-group"
+};
+
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Тип палети", -1
+/* HOISTED */
+);
+
+var _hoisted_41 = ["name"];
+
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллета от 1,5 м2 до 2 м2", -1
+/* HOISTED */
+);
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллета от 1 м2 до 1,49 м2", -1
+/* HOISTED */
+);
+
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллета от 0,5 м2 до 0,99 м2", -1
+/* HOISTED */
+);
+
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "Паллета до 0,49 м2", -1
+/* HOISTED */
+);
+
+var _hoisted_46 = [_hoisted_42, _hoisted_43, _hoisted_44, _hoisted_45];
+var _hoisted_47 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Вартість", -1
+/* HOISTED */
+);
+
+var _hoisted_49 = ["name"];
+var _hoisted_50 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Кількість", -1
+/* HOISTED */
+);
+
+var _hoisted_52 = ["name"];
+var _hoisted_53 = {
+  "class": "col-1 form-group ml-3"
+};
+
+var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Видалити", -1
+/* HOISTED */
+);
+
+var _hoisted_55 = ["onClick"];
+var _hoisted_56 = {
+  key: 2,
+  "class": "row pb-4",
+  id: "tires-disks"
+};
+
+var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-2 d-flex"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "col-form-label d-flex align-items-center"
+}, "Місця")], -1
+/* HOISTED */
+);
+
+var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-1 form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Шина")], -1
+/* HOISTED */
+);
+
+var _hoisted_59 = {
+  "class": "col-3 form-group"
+};
+
+var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Тип", -1
+/* HOISTED */
+);
+
+var _hoisted_61 = ["name"];
+
+var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "R 22,5", -1
+/* HOISTED */
+);
+
+var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "R 17,5", -1
+/* HOISTED */
+);
+
+var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "R 19,5", -1
+/* HOISTED */
+);
+
+var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "R 20", -1
+/* HOISTED */
+);
+
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 13-14", -1
+/* HOISTED */
+);
+
+var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 15-17", -1
+/* HOISTED */
+);
+
+var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 18-19", -1
+/* HOISTED */
+);
+
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 20-21", -1
+/* HOISTED */
+);
+
+var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 23", -1
+/* HOISTED */
+);
+
+var _hoisted_71 = [_hoisted_62, _hoisted_63, _hoisted_64, _hoisted_65, _hoisted_66, _hoisted_67, _hoisted_68, _hoisted_69, _hoisted_70];
+var _hoisted_72 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_73 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Кількість", -1
+/* HOISTED */
+);
+
+var _hoisted_74 = ["name"];
+var _hoisted_75 = {
+  "class": "col-1 form-group ml-3"
+};
+
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Видалити", -1
+/* HOISTED */
+);
+
+var _hoisted_77 = ["onClick"];
+
+var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-1 form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Диск")], -1
+/* HOISTED */
+);
+
+var _hoisted_79 = {
+  "class": "col-3 form-group"
+};
+
+var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Тип", -1
+/* HOISTED */
+);
+
+var _hoisted_81 = ["name"];
+
+var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "R 22,5", -1
+/* HOISTED */
+);
+
+var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "R 17,5", -1
+/* HOISTED */
+);
+
+var _hoisted_84 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "R 19,5", -1
+/* HOISTED */
+);
+
+var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "R 20", -1
+/* HOISTED */
+);
+
+var _hoisted_86 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 13-14", -1
+/* HOISTED */
+);
+
+var _hoisted_87 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 15-17", -1
+/* HOISTED */
+);
+
+var _hoisted_88 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 18-19", -1
+/* HOISTED */
+);
+
+var _hoisted_89 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 20-21", -1
+/* HOISTED */
+);
+
+var _hoisted_90 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "r 23", -1
+/* HOISTED */
+);
+
+var _hoisted_91 = [_hoisted_82, _hoisted_83, _hoisted_84, _hoisted_85, _hoisted_86, _hoisted_87, _hoisted_88, _hoisted_89, _hoisted_90];
+var _hoisted_92 = {
+  "class": "col-1 form-group"
+};
+
+var _hoisted_93 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Кількість", -1
+/* HOISTED */
+);
+
+var _hoisted_94 = ["name"];
+var _hoisted_95 = {
+  "class": "col-1 form-group ml-3"
+};
+
+var _hoisted_96 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Видалити", -1
+/* HOISTED */
+);
+
+var _hoisted_97 = ["onClick"];
+
+var _hoisted_98 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "btn btn-primary font-weight-bold"
+}, "Розрахувати ціну", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", null, _hoisted_7);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "class": "custom-select",
+    name: "send_type",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.send_type = $event;
+    }),
+    required: ""
+  }, _hoisted_13, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.send_type]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"row pb-4\">\r\n\t\t\t<div class=\"col-2 d-flex\">\r\n\t\t\t\t<p class=\"col-form-label d-flex align-items-center\">Фактична вага (кг.)</p>\r\n\t\t\t\t<p class=\"m-0 pl-2 d-flex align-items-center\"><i class=\"material-icons text-success\">done</i></p>\r\n\t\t\t</div>\r\n\r\n\t\t\t<div class=\"col-10 row\">\r\n\t\t\t\t<div class=\"col-5 form-group\">\r\n\t\t\t\t\t<label>Вага</label>\r\n\t\t\t\t\t<input type=\"text\" class=\"custom-control px-0 text-center\" name=\"actual_weight\" value=\"1\" style=\"width: 60px\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>"), $data.send_type === 'Вантажі' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-success",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.addPackage && $options.addPackage.apply($options, arguments);
+    })
+  }, "Додати"), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.packages_count, function (index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-10 row", 'package-' + index]),
+      key: index
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "number",
+      "class": "custom-control px-0 text-center",
+      name: 'package[' + index + '][count]',
+      value: "1",
+      style: {
+        "width": "60px"
+      },
+      required: "",
+      min: "1",
+      step: "1"
+    }, null, 8
+    /* PROPS */
+    , _hoisted_18)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "text",
+      "class": "custom-control px-0 text-center",
+      name: 'package[' + index + '][price]',
+      style: {
+        "width": "60px"
+      },
+      placeholder: "грн.",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_21)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "text",
+      "class": "custom-control px-0 text-center",
+      name: 'package[' + index + '][weight]',
+      style: {
+        "width": "60px"
+      },
+      placeholder: "кг.",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_24)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "text",
+      "class": "custom-control px-0 text-center",
+      name: 'package[' + index + '][length]',
+      style: {
+        "width": "60px"
+      },
+      placeholder: "см.",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_27)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "text",
+      "class": "custom-control px-0 text-center",
+      name: 'package[' + index + '][width]',
+      style: {
+        "width": "60px"
+      },
+      placeholder: "см.",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_30)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "text",
+      "class": "custom-control px-0 text-center",
+      name: 'package[' + index + '][height]',
+      style: {
+        "width": "60px"
+      },
+      placeholder: "см.",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_33)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+      "class": "material-icons",
+      onClick: function onClick($event) {
+        return $options.removePackage(index);
+      },
+      style: {
+        "cursor": "pointer"
+      }
+    }, "clear", 8
+    /* PROPS */
+    , _hoisted_36)])], 2
+    /* CLASS */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.send_type === 'Паллети' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-success",
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.addPallete && $options.addPallete.apply($options, arguments);
+    })
+  }, "Додати"), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.pallets_count, function (index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-10 row", 'pallete-' + index]),
+      key: index
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [_hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+      "class": "custom-select",
+      name: 'pallete[' + index + '][type]',
+      required: ""
+    }, _hoisted_46, 8
+    /* PROPS */
+    , _hoisted_41)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [_hoisted_48, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "text",
+      "class": "custom-control px-0 text-center",
+      name: 'pallete[' + index + '][price]',
+      style: {
+        "width": "60px"
+      },
+      placeholder: "грн.",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_49)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [_hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "number",
+      "class": "custom-control px-0 text-center",
+      name: 'pallete[' + index + '][count]',
+      value: "1",
+      style: {
+        "width": "60px"
+      },
+      placeholder: "од.",
+      min: "1",
+      step: "1",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_52)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [_hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+      "class": "material-icons",
+      onClick: function onClick($event) {
+        return $options.removePallete(index);
+      },
+      style: {
+        "cursor": "pointer"
+      }
+    }, "clear", 8
+    /* PROPS */
+    , _hoisted_55)])], 2
+    /* CLASS */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.send_type === 'Шини та диски' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_56, [_hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-success",
+    onClick: _cache[3] || (_cache[3] = function () {
+      return $options.addTire && $options.addTire.apply($options, arguments);
+    })
+  }, "Додати шину"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-success",
+    onClick: _cache[4] || (_cache[4] = function () {
+      return $options.addDisk && $options.addDisk.apply($options, arguments);
+    })
+  }, "Додати диск"), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.tires_count, function (index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-10 row", 'tire-' + index]),
+      key: index
+    }, [_hoisted_58, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [_hoisted_60, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+      "class": "custom-select",
+      name: 'tire[' + index + '][type]',
+      required: ""
+    }, _hoisted_71, 8
+    /* PROPS */
+    , _hoisted_61)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [_hoisted_73, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "number",
+      "class": "custom-control px-0 text-center",
+      name: 'tire[' + index + '][count]',
+      value: "1",
+      style: {
+        "width": "60px"
+      },
+      placeholder: "од.",
+      min: "1",
+      step: "1",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_74)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, [_hoisted_76, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+      "class": "material-icons",
+      onClick: function onClick($event) {
+        return $options.removeTire(index);
+      },
+      style: {
+        "cursor": "pointer"
+      }
+    }, "clear", 8
+    /* PROPS */
+    , _hoisted_77)])], 2
+    /* CLASS */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.disks_count, function (index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-10 row", 'disk-' + index]),
+      key: index
+    }, [_hoisted_78, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_79, [_hoisted_80, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+      "class": "custom-select",
+      name: 'disk[' + index + '][type]',
+      required: ""
+    }, _hoisted_91, 8
+    /* PROPS */
+    , _hoisted_81)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_92, [_hoisted_93, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "number",
+      "class": "custom-control px-0 text-center",
+      name: 'disk[' + index + '][count]',
+      value: "1",
+      style: {
+        "width": "60px"
+      },
+      placeholder: "од.",
+      min: "1",
+      step: "1",
+      required: ""
+    }, null, 8
+    /* PROPS */
+    , _hoisted_94)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_95, [_hoisted_96, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+      "class": "material-icons",
+      onClick: function onClick($event) {
+        return $options.removeDisk(index);
+      },
+      style: {
+        "cursor": "pointer"
+      }
+    }, "clear", 8
+    /* PROPS */
+    , _hoisted_97)])], 2
+    /* CLASS */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_98]);
 }
 
 /***/ }),
