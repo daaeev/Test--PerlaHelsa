@@ -1,5 +1,5 @@
 <template>
-	<form id="price-calculator-form">
+	<form id="price-calculator-form" @submit.prevent="submitForm">
 		<div class="row pb-4">
 			<div class="col-2 d-flex">
 				<p class="col-form-label d-flex align-items-center">Маршрут</p>
@@ -11,7 +11,7 @@
 			<div class="col-10 row">
 				<div class="col-5">
 					<label>Місто-відправник</label>
-					<select class="custom-select" name="contry_sender" required>
+					<select class="custom-select" name="country_sender" required>
 						<option value="Вінниця">Вінниця</option>
 						<option value="Дніпро">Дніпро</option>
 						<option value="Запоріжжя">Запоріжжя</option>
@@ -188,10 +188,10 @@
 				<div class="col-5 form-group">
 					<label>Тип палети</label>
 					<select class="custom-select" :name="'pallet[' + index + '][type]'" required>
-						<option value="1,5-2">Паллета от 1,5 м2 до 2 м2</option>
-						<option value="1-1,49">Паллета от 1 м2 до 1,49 м2</option>
-						<option value="0,5-0,99">Паллета от 0,5 м2 до 0,99 м2</option>
 						<option value="0-0,49">Паллета до 0,49 м2</option>
+						<option value="0,5-0,99">Паллета от 0,5 м2 до 0,99 м2</option>
+						<option value="1-1,49">Паллета от 1 м2 до 1,49 м2</option>
+						<option value="1,5-2">Паллета от 1,5 м2 до 2 м2</option>
 					</select>
 				</div>
 				<div class="col-1 form-group">
@@ -241,15 +241,12 @@
 				<div class="col-3 form-group">
 					<label>Тип</label>
 					<select class="custom-select" :name="'tire[' + index + '][type]'" required>
-						<option>R 22,5</option>
-						<option>R 17,5</option>
-						<option>R 19,5</option>
-						<option>R 20</option>
-						<option>r 13-14</option>
-						<option>r 15-17</option>
-						<option>r 18-19</option>
-						<option>r 20-21</option>
-						<option>r 23</option>
+						<option value="r 13-14">Легкові R 13-14</option>
+						<option value="r 15-17">Легкові R 15-17</option>
+						<option value="r 18-23">Легкові R 18-23</option>
+						<option value="R 17,5-19,5">Вантажні R 17,5-19,5</option>
+						<option value="R 20">Вантажні R 20</option>
+						<option value="R 21-22,5">Вантажні R 21-22,5</option>
 					</select>
 				</div>
 				<div class="col-1 form-group">
@@ -279,15 +276,12 @@
 				<div class="col-3 form-group">
 					<label>Тип</label>
 					<select class="custom-select" :name="'disk[' + index + '][type]'" required>
-						<option>R 22,5</option>
-						<option>R 17,5</option>
-						<option>R 19,5</option>
-						<option>R 20</option>
-						<option>r 13-14</option>
-						<option>r 15-17</option>
-						<option>r 18-19</option>
-						<option>r 20-21</option>
-						<option>r 23</option>
+						<option value="r 13-14">Легкові R 13-14</option>
+						<option value="r 15-17">Легкові R 15-17</option>
+						<option value="r 18-23">Легкові R 18-23</option>
+						<option value="R 17,5-19,5">Вантажні R 17,5-19,5</option>
+						<option value="R 20">Вантажні R 20</option>
+						<option value="R 21-22,5">Вантажні R 21-22,5</option>
 					</select>
 				</div>
 				<div class="col-1 form-group">
@@ -310,12 +304,14 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<button type="submit" class="btn btn-primary font-weight-bold">Розрахувати ціну</button>
 	</form>
 </template>
 
 <script>
+import axios from "../../axios/api";
+
 export default {
 	name: "CalculatorForm",
 
@@ -331,6 +327,17 @@ export default {
 	},
 
 	methods: {
+		submitForm() {
+			const formData = new FormData(
+				document.querySelector("#price-calculator-form")
+			);
+
+			axios
+				.post("/calculator/price", formData)
+				.then((res) => console.log(res.data))
+				.catch((err) => console.log(err.response.data));
+		},
+
 		/**
 		 * Добавить посылку
 		 */
@@ -375,7 +382,7 @@ export default {
 		 */
 		removePallet(id) {
 			document
-				.querySelector("#price-calculator-form #pallets .pallete-" + id)
+				.querySelector("#price-calculator-form #pallets .pallet-" + id)
 				.remove();
 		},
 
