@@ -24,7 +24,7 @@ class ApiController extends Controller
 
             return response()->json(['price' => $price]);
         } catch (\Throwable $e) {
-            return response()->json(['error' => $e->getMessage()], $e->getCode());
+            return response()->json(['error' => $e->getMessage()], $e->getCode() ?: 500);
         }
     }
 }
