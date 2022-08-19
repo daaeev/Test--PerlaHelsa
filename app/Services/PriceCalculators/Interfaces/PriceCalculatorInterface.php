@@ -11,8 +11,8 @@ interface PriceCalculatorInterface
      * Расчитать цену за доставку
      *
      * @param PriceCalculatorRequest $validate данные для расчета цены доставки
-     * @return integer
+     * @return int|float
      * @throws Exception при ошибке расчета цены
      */
-    public function calculate(PriceCalculatorRequest $validate): int;
+    public function calculate(PriceCalculatorRequest $validate): int|float;
 }
